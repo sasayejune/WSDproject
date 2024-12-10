@@ -8,11 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class ServiceController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String loginUser(){
-        return "login";
-    }
-
-    @RequestMapping(value = "/list")
-    public String home(){
         return "list";
     }
+
 }

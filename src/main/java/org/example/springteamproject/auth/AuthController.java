@@ -13,6 +13,11 @@ public class AuthController {
     @Autowired
     UserDAO userDAO;
 
+    @RequestMapping(value = "/login")
+    public String Login(){
+        return "login";
+    }
+
     @RequestMapping(value = "/login_ok", method = RequestMethod.POST)
     public String LoginCheck(HttpSession session, UserVO user){
         String returnURL;
