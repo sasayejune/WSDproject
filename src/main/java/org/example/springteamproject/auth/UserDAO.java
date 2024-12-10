@@ -13,7 +13,7 @@ public class UserDAO {
         return sqlSession.insert("USER.insertUser", user);
     }
 
-    public int getUser(int id){
-        return sqlSession.selectOne("USER.getUser", id);
+    public UserVO getUser(UserVO user){
+        return sqlSession.selectOne("USER.getUser", user);
     }
 }

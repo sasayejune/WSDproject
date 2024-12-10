@@ -5,24 +5,34 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@Controller
+import javax.servlet.http.HttpSession;
+
+@Controller("/auth")
 public class AuthController {
     @Autowired
     UserDAO userDAO;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String loginUser(){
-        return "login";
-    }
-    @RequestMapping(value = "/auth/login", method = RequestMethod.POST)
-    public String goHome(UserVO user){
-        int result = userDAO.insertUser(user);
-        System.out.println(result);
-        return "redirect:/list";
+    @RequestMapping(value = "/login_ok", method = RequestMethod.POST)
+    public String LoginCheck(HttpSession session, UserVO user){
+        String returnURL;
+        if(session.getAttribute("login") != null) session.removeAttribute("login");
+
+        UserVO loginUser = userDAO.getUser(user);
+        if(loginUser != null){
+            System.out.println("로그인 성공");
+            session.setAttribute("login", loginUser);
+            returnURL = "redirect:/list";
+        } else {
+            System.out.println("로그인 실패");
+            returnURL = "redirect:/";
+        }
+        return returnURL;
     }
 
-    @RequestMapping(value = "/list")
-    public String home(){
-        return "list";
+    @RequestMapping(value = "/logout")
+    public String Logout(HttpSession session){
+        session.invalidate();
+        return "redirect:/";
     }
+
 }

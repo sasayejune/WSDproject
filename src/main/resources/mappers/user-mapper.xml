@@ -9,6 +9,6 @@
         ( #{username} , #{password})
     </insert>
     <select id="getUser" resultType="user">
-        select * from USER where id=#{id}
+        select * from USER where username = #{username} and password = #{password}
     </select>
 </mapper>
