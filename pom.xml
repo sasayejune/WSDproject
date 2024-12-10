@@ -26,6 +26,11 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version>
+        </dependency>
+        <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>${junit.version}</version>
@@ -61,11 +66,17 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/servlets.com/cos -->
+        <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
         <dependency>
-            <groupId>servlets.com</groupId>
-            <artifactId>cos</artifactId>
-            <version>05Nov2002</version>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>3.0.3</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.5.9</version>
         </dependency>
     </dependencies>
 
