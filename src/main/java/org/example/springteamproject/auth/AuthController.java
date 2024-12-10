@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
 
-@Controller("/auth")
+@Controller
+@RequestMapping(value = "/auth")
 public class AuthController {
     @Autowired
     UserDAO userDAO;
