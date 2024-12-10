@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-<form action="auth/login_ok" method="post">
+<form action="${pageContext.request.contextPath}/auth/login_ok" method="post">
     <input type="text" name="username" placeholder="id"/>
     <input type="password" name="password" placeholder="password"/>
     <input type="submit" value="submit"/>

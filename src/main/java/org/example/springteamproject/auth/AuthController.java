@@ -27,10 +27,10 @@ public class AuthController {
         if(loginUser != null){
             System.out.println("로그인 성공");
             session.setAttribute("login", loginUser);
-            returnURL = "redirect:/list";
+            returnURL = "redirect:/";
         } else {
             System.out.println("로그인 실패");
-            returnURL = "redirect:/";
+            returnURL = "redirect:/auth/login";
         }
         return returnURL;
     }
