@@ -12,5 +12,13 @@
 </head>
 <body>
 <p>Hello world</p>
+<button onclick="goAddPage()">add</button>
 </body>
 </html>
+<script>
+    const contextPath = "<%= request.getContextPath() %>";
+
+    function goAddPage(){
+        window.location.href = contextPath + "/add";
+    }
+</script>
