@@ -14,7 +14,7 @@
 <%--    브라우저에서 캐싱된 파일을 호출해서 servlet.xml에 캐시 무효와 설정 추가--%>
 </head>
 <body>
-<form class="vertical">
+<form class="vertical" action="add_ok" id="addForm">
     <div class="horizontal">
         <label for="name">이름</label>
         <input type="text" id="name" name="name"/>
@@ -38,7 +38,7 @@
     <div class="horizontal">
         <label for="desiredPosition">희망보직</label>
 <%--        <input type="text" id="desiredPosition" name="desiredPosition"/>--%>
-        <select id="desiredPosition" onchange="handlePositionSelect(this.value)">
+        <select id="desiredPosition" onchange="setDetailOption(this.value)">
             <option value="육군" selected>육군</option>
             <option value="공군">공군</option>
             <option value="해군">해군</option>
@@ -49,41 +49,51 @@
         </select>
     </div>
     <div class="horizontal">
-        <label for="desiredDate">희망입영날짜</label>
-        <input type="date" id="desiredDate" name="desiredDate"/>
+        <label for="desiredDate1">희망입영날짜</label>
+        <input type="date" id="desiredDate1" name="desiredDate"/>
+        <span>~</span>
+        <input type="date" id="desiredDate2" name="desiredDate"/>
     </div>
     <div class="horizontal">
         <label for="certificate">보유 자격증 및 영어 성적 증명서</label>
         <input type="file" id="certificate" name="certificate"/>
     </div>
+    <button type="submit">submit</button>
 </form>
-<a href="${pageContext.request.contextPath}/user/list">Cancel</a>
 </body>
 </html>
 <script>
-    let armyOption = ["기술행정병", "전문특기병", "어학병", "카투사", "동반입대병", "취업맞춤특기병", "임기제부사관", "직계가족복무부대병", "연고지복무병"]
-    let airforceOption = ["기술병", "임기제부사관", "취업맞춤특기병"]
-    let navyOption = armyOption
-    function setDetailOption(){
-        let selectedPosition = document.getElementById("desiredPosition");
-        let desiredDetailPosition = document.getElementById("desiredDetailPosition");
-
-        if(selectedPosition.value === "육군"){
-            desiredDetailPosition.append()
-        }
+    window.onload = () => {
+        const selectedValue = document.getElementById("desiredPosition").value
+        console.log(selectedValue)
+        setDetailOption(selectedValue)
     }
-    function handlePositionSelect(position){
-        if(position === "육군"){
-            console.log("육군 selected")
-        } else if(position === "해군"){
-            console.log("해군 selected")
-        } else if(position === "해병대"){
-            console.log("해병대 selected")
-        } else {
-            console.log("공군 selected")
-        }
 
-        const detailSelect = document.getElementById("desiredDetailPosition");
+    let armyOption = ["기술행정병", "전문특기병", "어학병", "카투사", "동반입대병", "취업맞춤특기병", "임기제부사관", "직계가족복무부대병", "연고지복무병"] // 육군 보직 종류
+    let airForceOption = ["기술병", "임기제부사관", "취업맞춤특기병"] // 공군 보직 종류
+    let navyOption = ["기술병", "동반입대병", "임기제부사관", "취업맞춤특기병", "복무지역선택병", "전문 특기병"] // 해군 보직 종류
+    let marineCorpsOption = ["기술병", "임기제부사관", "취업맞춤특기병", "동반입대병", "직계가족복무병", "전문특기병"] // 해병대 보직 종류
 
+    function setDetailOption(option){
+        const positionSelect = document.getElementById("desiredDetailPosition");
+        positionSelect.replaceChildren();
+        let detailOption;
+
+        if(option === "육군") detailOption = armyOption;
+        if(option === "해군") detailOption = navyOption;
+        if(option === "공군") detailOption = airForceOption;
+        if(option === "해병대") detailOption = marineCorpsOption;
+
+        detailOption.forEach((itm) => {
+            const option = document.createElement("option");
+            option.value = itm;
+            option.textContent = itm;
+            positionSelect.appendChild(option);
+        })
     }
+    document.getElementById("addForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        console.log(e)
+        console.log(e.target);
+    })
 </script>

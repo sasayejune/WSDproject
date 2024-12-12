@@ -33,7 +33,7 @@
         </tr>
     </c:forEach>
 </table>
-<a href="${pageContext.request.contextPath}/user/add">Add New User</a>
+<button onclick="goAddPage()">Add</button>
 </body>
 </html>
 <script>
