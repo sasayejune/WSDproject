@@ -36,3 +36,10 @@
 <a href="${pageContext.request.contextPath}/user/add">Add New User</a>
 </body>
 </html>
+<script>
+    const contextPath = "<%= request.getContextPath() %>";
+
+    function goAddPage(){
+        window.location.href = contextPath + "/add";
+    }
+</script>

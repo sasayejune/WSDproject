@@ -7,8 +7,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class ServiceController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String loginUser(){
+    public String goList(){
         return "list";
     }
 
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public String addSoldier(){
+        return "add";
+    }
 }
