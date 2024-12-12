@@ -57,6 +57,7 @@
         <input type="file" id="certificate" name="certificate"/>
     </div>
 </form>
+<a href="${pageContext.request.contextPath}/user/list">Cancel</a>
 </body>
 </html>
 <script>
