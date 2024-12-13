@@ -2,6 +2,7 @@ package org.example.springteamproject.service;
 
 public class SoldierVO {
     private int id;
+    private int userID;
     private String name;
     private String birthDate;
     private int height;
@@ -12,6 +13,10 @@ public class SoldierVO {
     private String certificate; // 파일명
 
     // Getter 및 Setter 메서드
+
+    public int getUserID() { return userID; }
+
+    public void setUserID(int userID) { this.userID = userID; }
 
     public int getId() {
         return id;

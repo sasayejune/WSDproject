@@ -1,5 +1,6 @@
 package org.example.springteamproject.service;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -12,22 +13,20 @@ import java.util.List;
 
 @Repository
 public class SoldierDAO {
+    @Autowired
+    SqlSession sqlSession;
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    private final String SOLDIER_INSERT = "INSERT INTO SOLDIER (name, birthDate, height, weight, bodyGrade, desiredPosition, desiredDate, certificate) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     private final String SOLDIER_UPDATE = "UPDATE SOLDIER SET name = ?, birthDate = ?, height = ?, weight = ?, bodyGrade = ?, desiredPosition = ?, desiredDate = ?, certificate = ? WHERE id = ?";
     private final String SOLDIER_DELETE = "DELETE FROM SOLDIER WHERE id = ?";
     private final String SOLDIER_GET = "SELECT * FROM SOLDIER WHERE id = ?";
     private final String SOLDIER_LIST = "SELECT * FROM SOLDIER ORDER BY id DESC";
 
     // 병사 추가
-    public int addSoldier(SoldierVO vo) {
-        return jdbcTemplate.update(SOLDIER_INSERT, new Object[]{
-                vo.getName(), vo.getBirthDate(), vo.getHeight(), vo.getWeight(),
-                vo.getBodyGrade(), vo.getDesiredPosition(), vo.getDesiredDate(), vo.getCertificate()
-        });
+    public int addSoldier(SoldierVO vo){
+        return sqlSession.insert("SOLDIER.insertSoldier", vo);
     }
 
     // 병사 수정
