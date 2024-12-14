@@ -8,4 +8,7 @@
         values
             ( #{userID} , #{name}, #{height}, #{weight}, #{bodyGrade}, #{birthDate}, #{desiredPosition}, #{desiredDate}, #{certificate})
     </insert>
+    <select id="getAllSoldier" resultType="soldier">
+        select * from SOLDIER where userID = #{userID}
+    </select>
 </mapper>
