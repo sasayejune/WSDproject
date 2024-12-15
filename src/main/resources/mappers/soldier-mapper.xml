@@ -14,16 +14,16 @@
     <update id="updateSoldier">
         UPDATE SOLDIER
         SET
-            name = #{name},
-            height = #{height},
-            weight = #{weight},
-            bodyGrade = #{bodyGrade},
-            birthDate = #{birthDate},
-            desiredPosition = #{desiredPosition},
-            desiredDate = #{desiredDate},
-            certificate = #{certificate}
+        name = #{name},
+        height = #{height},
+        weight = #{weight},
+        bodyGrade = #{bodyGrade},
+        birthDate = #{birthDate},
+        desiredPosition = #{desiredPosition},
+        desiredDate = #{desiredDate}
         WHERE id = #{id}
     </update>
+
     <select id="getSoldier" parameterType="int" resultType="org.example.springteamproject.service.SoldierVO">
         SELECT * FROM SOLDIER WHERE id = #{id}
     </select>

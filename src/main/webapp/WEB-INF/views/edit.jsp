@@ -1,7 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<html lang="ko">
 <head>
+    <meta charset="UTF-8">
     <title>병사 정보 수정</title>
     <link href="${pageContext.request.contextPath}/resources/css/edit.css?v=2" rel="stylesheet">
 </head>
@@ -31,7 +32,8 @@
     </div>
     <div class="horizontal">
         <label for="desiredPosition">희망보직</label>
-        <select id="desiredPosition" onchange="setDetailOption(this.value)" name="desiredPosition">
+        <select id="desiredPosition" name="desiredPosition" onchange="setDetailOption(this.value)">
+            <option value="">선택하세요</option>
             <option value="육군" ${soldier.desiredPosition.startsWith('육군') ? 'selected' : ''}>육군</option>
             <option value="공군" ${soldier.desiredPosition.startsWith('공군') ? 'selected' : ''}>공군</option>
             <option value="해군" ${soldier.desiredPosition.startsWith('해군') ? 'selected' : ''}>해군</option>
@@ -54,36 +56,76 @@
     window.onload = () => {
         const selectedValue = document.getElementById("desiredPosition").value;
         setDetailOption(selectedValue);
-    }
+    };
 
-    let armyOption = ["기술행정병", "전문특기병", "어학병", "카투사", "동반입대병", "취업맞춤특기병", "임기제부사관", "직계가족복무부대병", "연고지복무병"];
-    let airForceOption = ["기술병", "임기제부사관", "취업맞춤특기병"];
-    let navyOption = ["기술병", "동반입대병", "임기제부사관", "취업맞춤특기병", "복무지역선택병", "전문 특기병"];
-    let marineCorpsOption = ["기술병", "임기제부사관", "취업맞춤특기병", "동반입대병", "직계가족복무병", "전문특기병"];
+    const armyOption = ["기술행정병", "전문특기병", "어학병", "카투사", "동반입대병", "취업맞춤특기병", "임기제부사관", "직계가족복무부대병", "연고지복무병"]; // 육군 보직 종류
+    const airForceOption = ["기술병", "임기제부사관", "취업맞춤특기병"]; // 공군 보직 종류
+    const navyOption = ["기술병", "동반입대병", "임기제부사관", "취업맞춤특기병", "복무지역선택병", "전문 특기병"]; // 해군 보직 종류
+    const marineCorpsOption = ["기술병", "임기제부사관", "취업맞춤특기병", "동반입대병", "직계가족복무병", "전문특기병"]; // 해병대 보직 종류
 
     function setDetailOption(option) {
         const positionSelect = document.getElementById("desiredDetailPosition");
-        positionSelect.replaceChildren();
+        positionSelect.innerHTML = ''; // 기존 옵션 제거
+
         let detailOption;
+        switch (option) {
+            case "육군":
+                detailOption = armyOption;
+                break;
+            case "해군":
+                detailOption = navyOption;
+                break;
+            case "공군":
+                detailOption = airForceOption;
+                break;
+            case "해병대":
+                detailOption = marineCorpsOption;
+                break;
+            default:
+                detailOption = [];
+        }
 
-        if (option === "육군") detailOption = armyOption;
-        if (option === "해군") detailOption = navyOption;
-        if (option === "공군") detailOption = airForceOption;
-        if (option === "해병대") detailOption = marineCorpsOption;
+        // 선택된 세부 보직이 있을 경우, 해당 보직을 기본 선택으로 설정
+        const selectedDetailPosition = "${soldier.desiredPosition.split('-')[1] || ''}";
 
-        // 기존 병사의 세부 보직을 선택
-        const currentDetailPosition = "${soldier.desiredPosition.split('-')[1]}";
-
-        detailOption.forEach((itm) => {
-            const option = document.createElement("option");
-            option.value = itm;
-            option.textContent = itm;
-            if (itm === currentDetailPosition) {
-                option.selected = true; // 현재 세부 보직 선택
+        detailOption.forEach(itm => {
+            const optionElement = document.createElement("option");
+            optionElement.value = itm;
+            optionElement.textContent = itm;
+            // 선택된 세부 보직이 현재 아이템과 같으면 selected 속성 추가
+            if (itm === selectedDetailPosition) {
+                optionElement.selected = true;
             }
-            positionSelect.appendChild(option);
+            positionSelect.appendChild(optionElement);
         });
     }
+
+    document.getElementById("editForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const form = e.target;
+        const desiredPosition = document.getElementById("desiredPosition").value;
+        const desiredDetailPosition = document.getElementById("desiredDetailPosition").value;
+        const desiredDate1 = document.getElementById("desiredDate").value;
+        const desiredDate2 = document.getElementById("desiredDate2").value;
+
+        const combinedPosition = desiredPosition + (desiredDetailPosition ? '-' + desiredDetailPosition : '');
+        const combinedDate = desiredDate1 + '~' + desiredDate2;
+
+        // 숨겨진 입력 필드 추가
+        const hiddenPositionInput = document.createElement("input");
+        hiddenPositionInput.type = "hidden";
+        hiddenPositionInput.name = "desiredPosition";
+        hiddenPositionInput.value = combinedPosition;
+
+        const hiddenDateInput = document.createElement("input");
+        hiddenDateInput.type = "hidden";
+        hiddenDateInput.name = "desiredDate";
+        hiddenDateInput.value = combinedDate;
+
+        form.append(hiddenPositionInput, hiddenDateInput);
+        form.submit();
+    });
 </script>
 </body>
 </html>

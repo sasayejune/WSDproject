@@ -30,8 +30,9 @@
             <td>${soldier.height}</td>
             <td>${soldier.weight}</td>
             <td>${soldier.bodyGrade}</td>
-            <td>${soldier.desiredPosition}</td>
-            <td>${soldier.desiredDate}</td>
+            <td>${soldier.desiredPosition.split(',')[1]}</td> <!-- 두 번째 값만 출력 -->
+            <td>${soldier.desiredDate.split(',')[1]}</td> <!-- 두 번째 값만 출력 -->
+
             <td>${soldier.certificate}</td>
             <td>
                 <a href="${pageContext.request.contextPath}/soldier/view?id=${soldier.id}">View</a>
