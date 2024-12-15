@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>병사 정보 수정</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="${pageContext.request.contextPath}/resources/css/edit.css?v=2" rel="stylesheet">
 </head>
 <body>
@@ -42,12 +43,14 @@
         </select>
     </div>
     <div class="horizontal">
-        <label for="desiredDate">희망입영날짜</label>
-        <input type="month" id="desiredDate" name="desiredDate" value="${soldier.desiredDate.split('~')[0]}"/>
-        <span>~</span>
-        <input type="month" id="desiredDate2" name="desiredDate2" value="${soldier.desiredDate.split('~')[1]}"/>
+        <label for="desiredDate">희망 입영 월</label>
+        <select id="desiredDate" name="desiredDate">
+            <option value="2024-01" ${soldier.desiredDate.contains("2024-01") ? 'selected' : ''}>2024-01</option>
+            <option value="2024-02" ${soldier.desiredDate.contains("2024-02") ? 'selected' : ''}>2024-02</option>
+            <option value="2024-03" ${soldier.desiredDate.contains("2024-03") ? 'selected' : ''}>2024-03</option>
+        </select>
     </div>
-    <button type="submit">수정</button>
+    <button type="submit" class="btn btn-outline-dark" id="submitBtn">Edit</button>
 </form>
 
 <script>
@@ -87,3 +90,72 @@
 </script>
 </body>
 </html>
+<style>
+    html{
+        font-size: 16px;
+    }
+    body{
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .vertical{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .horizontal{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+
+    body{
+        background-image: url(${pageContext.request.contextPath}/resources/img/battleCap.png);
+        background-size: 40%;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    #editForm{
+        width: 35%;
+        /*font-size: 1.6rem;*/
+        .horizontal{
+            margin-bottom: 20px;
+        }
+        input{
+            margin-left: 10px;
+            /*font-size: 1.4rem;*/
+            background-color: transparent;
+            border-radius: 16px;
+            border: 1px solid black;
+            outline: none;
+            padding: 5px 0 5px 10px;
+        }
+        select{
+            margin-left: 10px;
+            /*font-size: 1.4rem;*/
+            background-color: transparent;
+            border-radius: 16px;
+            border: 1px solid black;
+            outline: none;
+            padding: 5px 0 5px 10px;
+        }
+    }
+
+    #submitBtn{
+        width: 150px
+        /*font-size: 1.5rem;*/
+    }
+</style>
