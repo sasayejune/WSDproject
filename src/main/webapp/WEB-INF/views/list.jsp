@@ -36,10 +36,10 @@
 </body>
 </html>
 <script>
-    const contextPath = "<%= request.getContextPath() %>";
+    const path = "<%= request.getContextPath() %>";
 
     function goEditPage(id){
-        window.location.href = contextPath + "/soldier/edit?id="+id;
+        window.location.href = path + "/soldier/edit?id="+id;
     }
 </script>
 <style>

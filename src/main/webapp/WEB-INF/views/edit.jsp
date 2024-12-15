@@ -110,11 +110,8 @@
         const form = e.target;
         const desiredPosition = document.getElementById("desiredPosition").value;
         const desiredDetailPosition = document.getElementById("desiredDetailPosition").value;
-        const desiredDate1 = document.getElementById("desiredDate").value;
-        const desiredDate2 = document.getElementById("desiredDate2").value;
 
         const combinedPosition = desiredPosition + (desiredDetailPosition ? '-' + desiredDetailPosition : '');
-        const combinedDate = desiredDate1 + '~' + desiredDate2;
 
         // 숨겨진 입력 필드 추가
         const hiddenPositionInput = document.createElement("input");
@@ -122,12 +119,8 @@
         hiddenPositionInput.name = "desiredPosition";
         hiddenPositionInput.value = combinedPosition;
 
-        const hiddenDateInput = document.createElement("input");
-        hiddenDateInput.type = "hidden";
-        hiddenDateInput.name = "desiredDate";
-        hiddenDateInput.value = combinedDate;
 
-        form.append(hiddenPositionInput, hiddenDateInput);
+        form.append(hiddenPositionInput);
         form.submit();
     });
 </script>
