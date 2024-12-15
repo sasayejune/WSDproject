@@ -20,32 +20,27 @@
         <select name="category">
             <option value="">전체 보기</option>
             <c:forEach items="${list}" var="soldier">
-                <option value=${soldier.desiredPosition}>${soldier.name}</option>
+                <option value=${soldier.desiredPosition}>${soldier.name}:${soldier.desiredPosition}</option>
             </c:forEach>
         </select>
         <button type="submit">search</button>
     </form>
 </div>
-<table id="table-container" class="table table-hover">
-    <thead>
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">모집분야</th>
-        <th scope="col">접수 기간</th>
-        <th scope="col">입영 월</th>
-        <th scope="col">모집 인원</th>
-    </tr>
-    </thead>
-    <tbody id="table-body">
-    <tr>
-        <th scope="row">1</th>
-        <td>hello</td>
-        <td>hello</td>
-        <td>hello</td>
-        <td>hello</td>
-    </tr>
-    </tbody>
-</table>
+<div id="table-container" >
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">모집분야</th>
+            <th scope="col">접수 기간</th>
+            <th scope="col">입영 월</th>
+            <th scope="col">모집 인원</th>
+        </tr>
+        </thead>
+        <tbody id="table-body">
+        </tbody>
+    </table>
+</div>
 </body>
 </html>
 <style>
@@ -81,6 +76,12 @@
     #table-container{
         width: 70%;
         border: 1px solid black;
+        height: 60vh;
+        overflow: auto;
+    }
+
+    .enlist-item{
+        cursor: pointer;
     }
 </style>
-<script src="${pageContext.request.contextPath}/resources/js/view.js?v=3"></script>
+<script src="${pageContext.request.contextPath}/resources/js/view.js?v=6"></script>
