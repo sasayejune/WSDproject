@@ -25,7 +25,7 @@ public class ServiceController {
         this.soldierService = soldierService;
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String goList(Model model) {
         List<SoldierVO> soldierList = soldierService.getSoldierList();
         model.addAttribute("soldierList", soldierList);
@@ -67,7 +67,7 @@ public class ServiceController {
         return "redirect:/"; // 수정 후 병사 목록으로 리다이렉트
     }
   
-    @RequestMapping(value = "/view", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String goView(HttpSession session, Model model){
         UserVO user = (UserVO)session.getAttribute("login");
         model.addAttribute("list", soldierDAO.getSoldierList(user.getId()));
