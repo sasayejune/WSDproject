@@ -10,14 +10,15 @@
 <html>
 <head>
     <title>Title</title>
-    <link href="${pageContext.request.contextPath}/resources/css/add.css?v=2" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <%--    브라우저에서 캐싱된 파일을 호출해서 servlet.xml에 캐시 무효와 설정 추가--%>
 </head>
 <body>
+<%@include file="top.jsp"%>
 <form class="vertical" action="${pageContext.request.contextPath}/add_ok" id="addForm" method="post">
     <div class="horizontal">
         <label for="name">이름</label>
-        <input type="text" id="name" name="name" required/>
+        <input type="text" id="name" name="name" required autocomplete="off"/>
     </div>
     <div class="horizontal">
         <label for="birthDate">생년월일</label>
@@ -28,7 +29,7 @@
         <input type="number" id="height" name="height" min="0" required/>
     </div>
     <div class="horizontal">
-        <label for="weight">몸무게</label>
+        <label for="weight">몸무게(kg)</label>
         <input type="number" id="weight" name="weight" min="0" required/>
     </div>
     <div class="horizontal">
@@ -48,82 +49,88 @@
         </select>
     </div>
     <div class="horizontal">
-        <label for="desiredDate">희망입영날짜</label>
-        <input type="month" id="desiredDate" name="desiredDate" required/>
-        <span>~</span>
-        <input type="month" id="desiredDate2" name="desiredDate2" required/>
+        <label for="desiredDate">희망 입영 월</label>
+        <select id="desiredDate" name="desiredDate">
+            <option value="2024-01" selected>2024-01</option>
+            <option value="2024-02">2024-02</option>
+            <option value="2024-03">2024-03</option>
+        </select>
     </div>
 <%--    <div class="horizontal">--%>
 <%--        <label for="certificate">보유 자격증 및 영어 성적 증명서</label>--%>
 <%--        <input type="file" id="certificate" name="certificate"/>--%>
 <%--    </div>--%>
-    <button type="submit">submit</button>
+    <button type="submit" class="btn btn-outline-dark" id="submitBtn">Submit</button>
 </form>
 </body>
 </html>
-<script>
-    window.onload = () => {
-        const selectedValue = document.getElementById("desiredPosition").value
-        setDetailOption(selectedValue)
+<style>
+    html{
+        font-size: 16px;
+    }
+    body{
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
-    let armyOption = ["기술행정병", "전문특기병", "어학병", "카투사", "동반입대병", "취업맞춤특기병", "임기제부사관", "직계가족복무부대병", "연고지복무병"] // 육군 보직 종류
-    let airForceOption = ["기술병", "임기제부사관", "취업맞춤특기병"] // 공군 보직 종류
-    let navyOption = ["기술병", "동반입대병", "임기제부사관", "취업맞춤특기병", "복무지역선택병", "전문 특기병"] // 해군 보직 종류
-    let marineCorpsOption = ["기술병", "임기제부사관", "취업맞춤특기병", "동반입대병", "직계가족복무병", "전문특기병"] // 해병대 보직 종류
-
-    function setDetailOption(option){
-        const positionSelect = document.getElementById("desiredDetailPosition");
-        positionSelect.replaceChildren();
-        let detailOption;
-
-        if(option === "육군") detailOption = armyOption;
-        if(option === "해군") detailOption = navyOption;
-        if(option === "공군") detailOption = airForceOption;
-        if(option === "해병대") detailOption = marineCorpsOption;
-
-        detailOption.forEach((itm) => {
-            const option = document.createElement("option");
-            option.value = itm;
-            option.textContent = itm;
-            positionSelect.appendChild(option);
-        })
+    .vertical{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
     }
-    document.getElementById("addForm").addEventListener("submit", (e) => {
-        e.preventDefault();
 
-        const form = e.target;
+    .horizontal{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
 
-        const desiredPosition = document.getElementById("desiredPosition").value;
-        const desiredDetailPosition = document.getElementById("desiredDetailPosition").value;
-        const desiredDate1 = document.getElementById("desiredDate").value;
-        const desiredDate2 = document.getElementById("desiredDate2").value;
 
-        const combinedPosition = desiredPosition + '-' + desiredDetailPosition;
-        const combinedDate = desiredDate1 + '~' + desiredDate2;
+    body{
+        background-image: url(${pageContext.request.contextPath}/resources/img/battleCap.png);
+        background-size: 40%;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
 
-        document.querySelector('select[name="desiredPosition"]').remove();
-        document.querySelector('input[name="desiredDate"]').remove();
-
-        const hiddenPositionInput = document.createElement("input");
-        hiddenPositionInput.type = "hidden";
-        hiddenPositionInput.name = "desiredPosition";
-        hiddenPositionInput.value = combinedPosition;
-
-        const hiddenDateInput = document.createElement("input");
-        hiddenDateInput.type = "hidden";
-        hiddenDateInput.name = "desiredDate";
-        hiddenDateInput.value = combinedDate;
-
-        form.append(hiddenPositionInput);
-        form.append(hiddenDateInput);
-
-        console.log("Form Data:");
-        const formData = new FormData(form);
-        for (let [key, value] of formData.entries()) {
-            console.log(key + ": " + value);
+    #addForm{
+        width: 35%;
+        /*font-size: 1.6rem;*/
+        .horizontal{
+            margin-bottom: 20px;
         }
+        input{
+            margin-left: 10px;
+            /*font-size: 1.4rem;*/
+            background-color: transparent;
+            border-radius: 16px;
+            border: 1px solid black;
+            outline: none;
+            padding: 5px 0 5px 10px;
+        }
+        select{
+            margin-left: 10px;
+            /*font-size: 1.4rem;*/
+            background-color: transparent;
+            border-radius: 16px;
+            border: 1px solid black;
+            outline: none;
+            padding: 5px 0 5px 10px;
+        }
+    }
 
-        form.submit();
-    })
-</script>
+    #submitBtn{
+        width: 150px
+        /*font-size: 1.5rem;*/
+    }
+</style>
+<script src="${pageContext.request.contextPath}/resources/js/add.js?v=1"></script>
