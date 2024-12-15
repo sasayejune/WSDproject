@@ -1,14 +1,12 @@
 package org.example.springteamproject.service;
 
 import org.apache.ibatis.session.SqlSession;
+import org.example.springteamproject.auth.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 @Repository
@@ -45,24 +43,8 @@ public class SoldierDAO {
         return jdbcTemplate.queryForObject(SOLDIER_GET, new Object[]{id}, new BeanPropertyRowMapper<>(SoldierVO.class));
     }
 
-    // 병사 목록 조회
-    public List<SoldierVO> getSoldierList() {
-        return jdbcTemplate.query(SOLDIER_LIST, new RowMapper<SoldierVO>() {
-            @Override
-            public SoldierVO mapRow(ResultSet rs, int rowNum) throws SQLException {
-                SoldierVO data = new SoldierVO();
-                data.setId(rs.getInt("id"));
-                data.setName(rs.getString("name"));
-                data.setBirthDate(rs.getString("birthDate"));
-                data.setHeight(rs.getInt("height"));
-                data.setWeight(rs.getInt("weight"));
-                data.setBodyGrade(rs.getInt("bodyGrade"));
-                data.setDesiredPosition(rs.getString("desiredPosition"));
-                data.setDesiredDate(rs.getString("desiredDate"));
-                data.setCertificate(rs.getString("certificate"));
-                return data;
-            }
-        });
+    public List<SoldierVO> getSoldierList(int userID){
+        return sqlSession.selectList("SOLDIER.getAllSoldier", userID);
     }
 
     // 병사 검색
