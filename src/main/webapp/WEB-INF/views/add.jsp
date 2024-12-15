@@ -68,10 +68,10 @@
         setDetailOption(selectedValue)
     }
 
-    let armyOption = ["기술행정병", "전문특기병", "어학병", "카투사", "동반입대병", "취업맞춤특기병", "임기제부사관", "직계가족복무부대병", "연고지복무병"] // 육군 보직 종류
-    let airForceOption = ["기술병", "임기제부사관", "취업맞춤특기병"] // 공군 보직 종류
-    let navyOption = ["기술병", "동반입대병", "임기제부사관", "취업맞춤특기병", "복무지역선택병", "전문 특기병"] // 해군 보직 종류
-    let marineCorpsOption = ["기술병", "임기제부사관", "취업맞춤특기병", "동반입대병", "직계가족복무병", "전문특기병"] // 해병대 보직 종류
+    let armyOption = ["기술행정병", "전문특기병", "어학병", "동반입대병", "직계가족복무부대병", "연고지복무병"] // 육군 보직 종류
+    let airForceOption = ["기술병", "전문특기병", "취업맞춤특기병", "임기제부사관"] // 공군 보직 종류
+    let navyOption = ["기술병", "동반입대병", "복무지역선택병", "전문특기병"] // 해군 보직 종류
+    let marineCorpsOption = ["기술병", "어학병", "동반입대병", "직계가족복무병"] // 해병대 보직 종류
 
     function setDetailOption(option){
         const positionSelect = document.getElementById("desiredDetailPosition");

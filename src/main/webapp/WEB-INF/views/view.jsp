@@ -15,10 +15,10 @@
 <body>
 hello world
 <div>
-    <form>
-        <select>
+    <form method="get" id="search-form">
+        <select name="category">
             <c:forEach items="${list}" var="soldier">
-                <option value=${soldier.id}>${soldier.name}</option>
+                <option value=${soldier.desiredPosition}>${soldier.name}</option>
             </c:forEach>
         </select>
         <button type="submit">search</button>
@@ -34,7 +34,7 @@ hello world
         <th scope="col">모집 인원</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody id="table-body">
     <tr>
         <th scope="row">1</th>
         <td>hello</td>
@@ -81,3 +81,4 @@ hello world
         border: 1px solid black;
     }
 </style>
+<script src="${pageContext.request.contextPath}/resources/js/view.js?v=2"></script>
