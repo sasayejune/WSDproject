@@ -42,6 +42,7 @@
     </tbody>
 </table>
 <button onclick="goAddPage()">병사 추가</button>
+<button onclick="goViewPage()">입영 가능 날짜 조회</button>
 </body>
 </html>
 <script>
@@ -49,5 +50,9 @@
 
     function goAddPage(){
         window.location.href = contextPath + "/add";
+    }
+
+    function goViewPage(){
+        window.location.href = contextPath + "/view";
     }
 </script>

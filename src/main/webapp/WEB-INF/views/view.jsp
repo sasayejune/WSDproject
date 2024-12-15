@@ -18,6 +18,7 @@
 <div>
     <form method="get" id="search-form">
         <select name="category">
+            <option value="">전체 보기</option>
             <c:forEach items="${list}" var="soldier">
                 <option value=${soldier.desiredPosition}>${soldier.name}</option>
             </c:forEach>

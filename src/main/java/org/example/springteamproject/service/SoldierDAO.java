@@ -47,6 +47,7 @@ public class SoldierDAO {
         return sqlSession.selectList("SOLDIER.getAllSoldier", userID);
     }
 
+    public List<SoldierVO> getAllSoldierList() { return sqlSession.selectList("SOLDIER.getSoldierList"); }
     // 병사 검색
     public List<SoldierVO> searchSoldiers(String query) {
         String sql = "SELECT * FROM SOLDIER WHERE name LIKE ? OR desiredPosition LIKE ?";

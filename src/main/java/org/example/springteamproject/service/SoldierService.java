@@ -17,7 +17,7 @@ public class SoldierService {
     }
 
     public List<SoldierVO> getSoldierList() {
-        return soldierDAO.getSoldierList();
+        return soldierDAO.getAllSoldierList();
     }
 
     public int addSoldier(SoldierVO soldier) {
