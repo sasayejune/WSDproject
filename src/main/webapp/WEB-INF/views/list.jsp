@@ -44,7 +44,6 @@
 <button onclick="goAddPage()">병사 추가</button>
 </body>
 </html>
-
 <script>
     const contextPath = "<%= request.getContextPath() %>";
 

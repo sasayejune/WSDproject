@@ -1,18 +1,23 @@
 package org.example.springteamproject.service;
 
 import org.example.springteamproject.auth.UserVO;
+import org.springframework.http.HttpRequest;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.example.springteamproject.service.SoldierService;
 import org.example.springteamproject.service.SoldierVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpSession;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class ServiceController {
+
+    @Autowired
+    SoldierDAO soldierDAO;
+  
     private final SoldierService soldierService;
 
     @Autowired
@@ -61,6 +66,12 @@ public class ServiceController {
 
         return "redirect:/"; // 수정 후 병사 목록으로 리다이렉트
     }
-
+  
+    @RequestMapping(value = "/view", method = RequestMethod.GET)
+    public String goView(HttpSession session, Model model){
+        UserVO user = (UserVO)session.getAttribute("login");
+        model.addAttribute("list", soldierDAO.getSoldierList(user.getId()));
+        return "view";
+    }
 
 }
