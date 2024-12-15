@@ -24,13 +24,13 @@
                     </div>
                     <div class="wrapper2">
                         <p><span>신체등급 : </span>${soldier.bodyGrade}</p>
-                        <p><span>희망보직 : </span>${soldier.desiredPosition}</p>
+                        <p><span>희망보직 : </span>${soldier.desiredPosition.split(',')[1]}</p>
                         <p><span>희망 입영월 : </span>${soldier.desiredDate}</p>
                             <%--                    <p>${soldier.certificate}</p>--%>
                     </div>
                 </div>
             </div>
-            </div>
+      </div>
     </c:forEach>
 </div>
 </body>
