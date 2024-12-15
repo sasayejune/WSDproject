@@ -17,23 +17,23 @@
 <form class="vertical" action="${pageContext.request.contextPath}/add_ok" id="addForm" method="post">
     <div class="horizontal">
         <label for="name">이름</label>
-        <input type="text" id="name" name="name"/>
+        <input type="text" id="name" name="name" required/>
     </div>
     <div class="horizontal">
         <label for="birthDate">생년월일</label>
-        <input type="date" id="birthDate" name="birthDate"/>
+        <input type="date" id="birthDate" name="birthDate" required/>
     </div>
     <div class="horizontal">
         <label for="height">키(cm)</label>
-        <input type="number" id="height" name="height" min="0"/>
+        <input type="number" id="height" name="height" min="0" required/>
     </div>
     <div class="horizontal">
         <label for="weight">몸무게</label>
-        <input type="number" id="weight" name="weight" min="0"/>
+        <input type="number" id="weight" name="weight" min="0" required/>
     </div>
     <div class="horizontal">
         <label for="bodyGrade">신체등급</label>
-        <input type="number" id="bodyGrade" name="bodyGrade" min="0" max="6"/>
+        <input type="number" id="bodyGrade" name="bodyGrade" min="0" max="6" required/>
     </div>
     <div class="horizontal">
         <label for="desiredPosition">희망보직</label>
@@ -50,9 +50,9 @@
     </div>
     <div class="horizontal">
         <label for="desiredDate">희망입영날짜</label>
-        <input type="month" id="desiredDate" name="desiredDate"/>
+        <input type="month" id="desiredDate" name="desiredDate" required/>
         <span>~</span>
-        <input type="month" id="desiredDate2" name="desiredDate2"/>
+        <input type="month" id="desiredDate2" name="desiredDate2" required/>
     </div>
 <%--    <div class="horizontal">--%>
 <%--        <label for="certificate">보유 자격증 및 영어 성적 증명서</label>--%>
