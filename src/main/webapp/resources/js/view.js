@@ -392,3 +392,7 @@ window.onload = init;
 
 // URL 변경 시 데이터 다시 로드 (이벤트 리스너)
 window.onpopstate = init;
+
+function goAddPage(){
+    window.location.href = contextPath + "/add";
+}
