@@ -14,6 +14,7 @@
 <%--    브라우저에서 캐싱된 파일을 호출해서 servlet.xml에 캐시 무효와 설정 추가--%>
 </head>
 <body>
+<%@include file="top.jsp"%>
 <form class="vertical" action="${pageContext.request.contextPath}/add_ok" id="addForm" method="post">
     <div class="horizontal">
         <label for="name">이름</label>

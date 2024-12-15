@@ -5,16 +5,15 @@
     <title>병사 목록</title>
 </head>
 <body>
+<%@include file="top.jsp"%>
 <div id="wrapper">
     <c:forEach var="soldier" items="${soldierList}">
         <div class="content-wrapper">
             <img src="${pageContext.request.contextPath}/resources/img/soldier.jpeg" alt="soldier"/>
             <div class="content-container">
                 <div class="button-wrapper">
-                    <button onclick="goEditPage(${soldier.id})">
-                        Edit
-                    </button>
-                    <button>delete</button>
+                    <button class="btn btn-outline-info" id="modify-btn" onclick="goEditPage(${soldier.id})">Edit</button>
+                    <button class="btn btn-outline-danger" id="delete-btn" onclick=delete_ok(${board.id})>delete</button>
                 </div>
                 <div class="info-wrapper">
                     <div class="wrapper1">
@@ -34,20 +33,10 @@
             </div>
     </c:forEach>
 </div>
-<button onclick="goAddPage()">병사 추가</button>
-<button onclick="goViewPage()">입영 가능 날짜 조회</button>
 </body>
 </html>
 <script>
     const contextPath = "<%= request.getContextPath() %>";
-
-    function goAddPage() {
-        window.location.href = contextPath + "/add";
-    }
-
-    function goViewPage() {
-        window.location.href = contextPath + "/view";
-    }
 
     function goEditPage(id){
         window.location.href = contextPath + "/soldier/edit?id="+id;
@@ -109,7 +98,7 @@
         }
     }
     .content-container{
-        width: 65%;
+        width: 75%;
     }
     .button-wrapper{
         display: flex;

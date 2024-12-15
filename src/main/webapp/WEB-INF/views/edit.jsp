@@ -7,6 +7,7 @@
     <link href="${pageContext.request.contextPath}/resources/css/edit.css?v=2" rel="stylesheet">
 </head>
 <body>
+<%@include file="top.jsp"%>
 <form class="vertical" action="${pageContext.request.contextPath}/soldier/edit_ok" id="editForm" method="post">
     <input type="hidden" name="id" value="${soldier.id}"/> <!-- 병사 ID를 숨겨진 필드로 전달 -->
 
