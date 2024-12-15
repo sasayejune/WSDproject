@@ -2,37 +2,53 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>User List</title>
+    <title>병사 목록</title>
 </head>
 <body>
-<h2>User List</h2>
+<h1>병사 목록</h1>
 <table border="1">
+    <thead>
     <tr>
+        <th>ID</th>
         <th>이름</th>
         <th>생년월일</th>
-        <th>몸무게</th>
-        <th>키</th>
-        <th>희망 보직</th>
-        <th>희망 입영 날짜</th>
+        <th>신장</th>
+        <th>체중</th>
         <th>신체 등급</th>
-        <th>Actions</th>
+        <th>희망 직위</th>
+        <th>희망 날짜</th>
+        <th>증명서</th>
+        <th>Actions</th> <!-- Actions 열 추가 -->
     </tr>
-    <c:forEach var="user" items="${userList}">
+    </thead>
+    <tbody>
+    <c:forEach var="soldier" items="${soldierList}">
         <tr>
-            <td>${user.name}</td>
-            <td>${user.birthDate}</td>
-            <td>${user.weight}</td>
-            <td>${user.height}</td>
-            <td>${user.desiredPosition}</td>
-            <td>${user.desiredEnlistmentDate}</td>
-            <td>${user.physicalGrade}</td>
+            <td>${soldier.id}</td>
+            <td>${soldier.name}</td>
+            <td>${soldier.birthDate}</td>
+            <td>${soldier.height}</td>
+            <td>${soldier.weight}</td>
+            <td>${soldier.bodyGrade}</td>
+            <td>${soldier.desiredPosition}</td>
+            <td>${soldier.desiredDate}</td>
+            <td>${soldier.certificate}</td>
             <td>
-                <a href="${pageContext.request.contextPath}/user/view?id=${user.id}">View</a>
-                <a href="${pageContext.request.contextPath}/user/edit?id=${user.id}">Edit</a>
+                <a href="${pageContext.request.contextPath}/soldier/view?id=${soldier.id}">View</a>
+                <a href="${pageContext.request.contextPath}/soldier/edit?id=${soldier.id}">Edit</a>
             </td>
         </tr>
     </c:forEach>
+    </tbody>
 </table>
-<a href="${pageContext.request.contextPath}/user/add">Add New User</a>
+<button onclick="goAddPage()">병사 추가</button>
 </body>
 </html>
+
+<script>
+    const contextPath = "<%= request.getContextPath() %>";
+
+    function goAddPage(){
+        window.location.href = contextPath + "/add";
+    }
+</script>

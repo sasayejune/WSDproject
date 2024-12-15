@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="SOLDIER">
+
+    <insert id="insertSoldier">
+        insert into SOLDIER ( userID, name, height, weight, bodyGrade, birthDate, desiredPosition, desiredDate, certificate)
+        values
+            ( #{userID} , #{name}, #{height}, #{weight}, #{bodyGrade}, #{birthDate}, #{desiredPosition}, #{desiredDate}, #{certificate})
+    </insert>
+
+    <update id="updateSoldier">
+        UPDATE SOLDIER
+        SET
+            name = #{name},
+            height = #{height},
+            weight = #{weight},
+            bodyGrade = #{bodyGrade},
+            birthDate = #{birthDate},
+            desiredPosition = #{desiredPosition},
+            desiredDate = #{desiredDate},
+            certificate = #{certificate}
+        WHERE id = #{id}
+    </update>
+
+
+
+
+    <select id="getSoldier" parameterType="int" resultType="org.example.springteamproject.service.SoldierVO">
+        SELECT * FROM SOLDIER WHERE id = #{id}
+    </select>
+
+    <select id="getSoldierList" resultType="org.example.springteamproject.service.SoldierVO">
+        SELECT * FROM SOLDIER ORDER BY id DESC
+    </select>
+
+
+</mapper>
