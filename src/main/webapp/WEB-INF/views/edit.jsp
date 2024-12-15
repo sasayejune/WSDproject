@@ -67,41 +67,22 @@
     const navyOption = ["기술병", "동반입대병", "임기제부사관", "취업맞춤특기병", "복무지역선택병", "전문 특기병"]; // 해군 보직 종류
     const marineCorpsOption = ["기술병", "임기제부사관", "취업맞춤특기병", "동반입대병", "직계가족복무병", "전문특기병"]; // 해병대 보직 종류
 
-    function setDetailOption(option) {
+    function setDetailOption(option){
         const positionSelect = document.getElementById("desiredDetailPosition");
-        positionSelect.innerHTML = ''; // 기존 옵션 제거
-
+        positionSelect.replaceChildren();
         let detailOption;
-        switch (option) {
-            case "육군":
-                detailOption = armyOption;
-                break;
-            case "해군":
-                detailOption = navyOption;
-                break;
-            case "공군":
-                detailOption = airForceOption;
-                break;
-            case "해병대":
-                detailOption = marineCorpsOption;
-                break;
-            default:
-                detailOption = [];
-        }
 
-        // 선택된 세부 보직이 있을 경우, 해당 보직을 기본 선택으로 설정
-        const selectedDetailPosition = "${soldier.desiredPosition.split('-')[1] || ''}";
+        if(option === "육군") detailOption = armyOption;
+        if(option === "해군") detailOption = navyOption;
+        if(option === "공군") detailOption = airForceOption;
+        if(option === "해병대") detailOption = marineCorpsOption;
 
-        detailOption.forEach(itm => {
-            const optionElement = document.createElement("option");
-            optionElement.value = itm;
-            optionElement.textContent = itm;
-            // 선택된 세부 보직이 현재 아이템과 같으면 selected 속성 추가
-            if (itm === selectedDetailPosition) {
-                optionElement.selected = true;
-            }
-            positionSelect.appendChild(optionElement);
-        });
+        detailOption.forEach((itm) => {
+            const option = document.createElement("option");
+            option.value = itm;
+            option.textContent = itm;
+            positionSelect.appendChild(option);
+        })
     }
 
     document.getElementById("editForm").addEventListener("submit", (e) => {
@@ -111,9 +92,15 @@
         const desiredPosition = document.getElementById("desiredPosition").value;
         const desiredDetailPosition = document.getElementById("desiredDetailPosition").value;
 
+        console.log("position : " + desiredPosition);
+        console.log("detail : " + desiredDetailPosition);
+
         const combinedPosition = desiredPosition + (desiredDetailPosition ? '-' + desiredDetailPosition : '');
 
+        console.log("combine : " + combinedPosition);
         // 숨겨진 입력 필드 추가
+        document.querySelector('select[name="desiredPosition"]').remove();
+
         const hiddenPositionInput = document.createElement("input");
         hiddenPositionInput.type = "hidden";
         hiddenPositionInput.name = "desiredPosition";

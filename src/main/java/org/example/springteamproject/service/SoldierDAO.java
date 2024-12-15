@@ -31,12 +31,9 @@ public class SoldierDAO {
         return sqlSession.update("SOLDIER.updateSoldier", vo);
     }
 
-
-
+    public int deleteSoldier(int id) { return sqlSession.delete("SOLDIER.deleteSoldier", id); }
     // 병사 삭제
-    public int deleteSoldier(int id) {
-        return jdbcTemplate.update(SOLDIER_DELETE, new Object[]{id});
-    }
+
 
     // 병사 조회
     public SoldierVO getSoldier(int id) {

@@ -13,7 +13,7 @@
             <div class="content-container">
                 <div class="button-wrapper">
                     <button class="btn btn-outline-info" id="modify-btn" onclick="goEditPage(${soldier.id})">Edit</button>
-                    <button class="btn btn-outline-danger" id="delete-btn" onclick=delete_ok(${board.id})>delete</button>
+                    <button class="btn btn-outline-danger" id="delete-btn" onclick=goDeletePage(${soldier.id})>delete</button>
                 </div>
                 <div class="info-wrapper">
                     <div class="wrapper1">
@@ -24,7 +24,7 @@
                     </div>
                     <div class="wrapper2">
                         <p><span>신체등급 : </span>${soldier.bodyGrade}</p>
-                        <p><span>희망보직 : </span>${soldier.desiredPosition.split(',')[1]}</p>
+                        <p><span>희망보직 : </span>${soldier.desiredPosition}</p>
                         <p><span>희망 입영월 : </span>${soldier.desiredDate}</p>
                             <%--                    <p>${soldier.certificate}</p>--%>
                     </div>
@@ -40,6 +40,12 @@
 
     function goEditPage(id){
         window.location.href = path + "/soldier/edit?id="+id;
+    }
+
+    function goDeletePage(id){
+        if(confirm("정말 삭제하시겠습니까?")){
+            window.location.href = path + "/soldier/delete_ok/" + id;
+        }
     }
 </script>
 <style>

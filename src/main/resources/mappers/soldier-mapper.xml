@@ -31,4 +31,7 @@
     <select id="getSoldierList" resultType="org.example.springteamproject.service.SoldierVO">
         SELECT * FROM SOLDIER ORDER BY id DESC
     </select>
+    <delete id="deleteSoldier">
+        delete from SOLDIER where id =  #{id}
+    </delete>
 </mapper>
