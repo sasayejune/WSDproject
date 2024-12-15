@@ -29,13 +29,11 @@ public class SoldierDAO {
         return sqlSession.insert("SOLDIER.insertSoldier", vo);
     }
 
-    // 병사 수정
     public int updateSoldier(SoldierVO vo) {
-        return jdbcTemplate.update(SOLDIER_UPDATE, new Object[]{
-                vo.getName(), vo.getBirthDate(), vo.getHeight(), vo.getWeight(),
-                vo.getBodyGrade(), vo.getDesiredPosition(), vo.getDesiredDate(), vo.getCertificate(), vo.getId()
-        });
+        return sqlSession.update("SOLDIER.updateSoldier", vo);
     }
+
+
 
     // 병사 삭제
     public int deleteSoldier(int id) {
@@ -72,5 +70,10 @@ public class SoldierDAO {
         String sql = "SELECT * FROM SOLDIER WHERE name LIKE ? OR desiredPosition LIKE ?";
         return jdbcTemplate.query(sql, new Object[]{"%" + query + "%", "%" + query + "%"},
                 new BeanPropertyRowMapper<>(SoldierVO.class));
+    }
+
+    // 병사 ID로 조회 (추가된 메서드)
+    public SoldierVO getSoldierById(long id) {
+        return jdbcTemplate.queryForObject(SOLDIER_GET, new Object[]{id}, new BeanPropertyRowMapper<>(SoldierVO.class));
     }
 }

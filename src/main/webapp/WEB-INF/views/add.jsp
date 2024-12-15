@@ -11,7 +11,7 @@
 <head>
     <title>Title</title>
     <link href="${pageContext.request.contextPath}/resources/css/add.css?v=2" rel="stylesheet">
-<%--    브라우저에서 캐싱된 파일을 호출해서 servlet.xml에 캐시 무효와 설정 추가--%>
+    <%--    브라우저에서 캐싱된 파일을 호출해서 servlet.xml에 캐시 무효와 설정 추가--%>
 </head>
 <body>
 <form class="vertical" action="${pageContext.request.contextPath}/add_ok" id="addForm" method="post">
@@ -37,7 +37,7 @@
     </div>
     <div class="horizontal">
         <label for="desiredPosition">희망보직</label>
-<%--        <input type="text" id="desiredPosition" name="desiredPosition"/>--%>
+        <%--        <input type="text" id="desiredPosition" name="desiredPosition"/>--%>
         <select id="desiredPosition" onchange="setDetailOption(this.value)" name="desiredPosition">
             <option value="육군" selected>육군</option>
             <option value="공군">공군</option>
@@ -54,10 +54,10 @@
         <span>~</span>
         <input type="month" id="desiredDate2" name="desiredDate2"/>
     </div>
-<%--    <div class="horizontal">--%>
-<%--        <label for="certificate">보유 자격증 및 영어 성적 증명서</label>--%>
-<%--        <input type="file" id="certificate" name="certificate"/>--%>
-<%--    </div>--%>
+    <%--    <div class="horizontal">--%>
+    <%--        <label for="certificate">보유 자격증 및 영어 성적 증명서</label>--%>
+    <%--        <input type="file" id="certificate" name="certificate"/>--%>
+    <%--    </div>--%>
     <button type="submit">submit</button>
 </form>
 </body>
