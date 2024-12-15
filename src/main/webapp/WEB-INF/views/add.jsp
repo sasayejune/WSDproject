@@ -37,7 +37,6 @@
     </div>
     <div class="horizontal">
         <label for="desiredPosition">희망보직</label>
-<%--        <input type="text" id="desiredPosition" name="desiredPosition"/>--%>
         <select id="desiredPosition" onchange="setDetailOption(this.value)" name="desiredPosition">
             <option value="육군" selected>육군</option>
             <option value="공군">공군</option>
@@ -62,5 +61,69 @@
 </form>
 </body>
 </html>
-<script src="${pageContext.request.contextPath}/resources/js/add.js
+<script>
+    window.onload = () => {
+        const selectedValue = document.getElementById("desiredPosition").value
+        setDetailOption(selectedValue)
+    }
+
+    let armyOption = ["기술행정병", "전문특기병", "어학병", "카투사", "동반입대병", "취업맞춤특기병", "임기제부사관", "직계가족복무부대병", "연고지복무병"] // 육군 보직 종류
+    let airForceOption = ["기술병", "임기제부사관", "취업맞춤특기병"] // 공군 보직 종류
+    let navyOption = ["기술병", "동반입대병", "임기제부사관", "취업맞춤특기병", "복무지역선택병", "전문 특기병"] // 해군 보직 종류
+    let marineCorpsOption = ["기술병", "임기제부사관", "취업맞춤특기병", "동반입대병", "직계가족복무병", "전문특기병"] // 해병대 보직 종류
+
+    function setDetailOption(option){
+        const positionSelect = document.getElementById("desiredDetailPosition");
+        positionSelect.replaceChildren();
+        let detailOption;
+
+        if(option === "육군") detailOption = armyOption;
+        if(option === "해군") detailOption = navyOption;
+        if(option === "공군") detailOption = airForceOption;
+        if(option === "해병대") detailOption = marineCorpsOption;
+
+        detailOption.forEach((itm) => {
+            const option = document.createElement("option");
+            option.value = itm;
+            option.textContent = itm;
+            positionSelect.appendChild(option);
+        })
+    }
+    document.getElementById("addForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const form = e.target;
+
+        const desiredPosition = document.getElementById("desiredPosition").value;
+        const desiredDetailPosition = document.getElementById("desiredDetailPosition").value;
+        const desiredDate1 = document.getElementById("desiredDate").value;
+        const desiredDate2 = document.getElementById("desiredDate2").value;
+
+        const combinedPosition = desiredPosition + '-' + desiredDetailPosition;
+        const combinedDate = desiredDate1 + '~' + desiredDate2;
+
+        document.querySelector('select[name="desiredPosition"]').remove();
+        document.querySelector('input[name="desiredDate"]').remove();
+
+        const hiddenPositionInput = document.createElement("input");
+        hiddenPositionInput.type = "hidden";
+        hiddenPositionInput.name = "desiredPosition";
+        hiddenPositionInput.value = combinedPosition;
+
+        const hiddenDateInput = document.createElement("input");
+        hiddenDateInput.type = "hidden";
+        hiddenDateInput.name = "desiredDate";
+        hiddenDateInput.value = combinedDate;
+
+        form.append(hiddenPositionInput);
+        form.append(hiddenDateInput);
+
+        console.log("Form Data:");
+        const formData = new FormData(form);
+        for (let [key, value] of formData.entries()) {
+            console.log(key + ": " + value);
+        }
+
+        form.submit();
+    })
 </script>
